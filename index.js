@@ -1,39 +1,39 @@
-const app = require('express')();
-var bodyParser = require('body-parser');
+const app = require('express')()
+let bodyParser = require('body-parser')
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
-const alunos = [];
+const alunos = []
 
-const addAluno = function(nome, sala) {
+const addAluno = (nome, sala) => {
     alunos.push({
         nome: nome,
         sala: sala
-    });
+    })
 
     return {
         nome: nome,
         sala: sala
-    };
+    }
 }
 
-const getAlunos = function() {
-    return alunos;
-};
+const getAlunos = () => {
+    return alunos
+}
 
-app.get('/aluno', function (req, res) {
+app.get('/aluno', (req, res) => {
     res.status(200)
-        .json(getAlunos());
-});
+        .json(getAlunos())
+})
 
-app.post('/aluno', function (req, res) {
+app.post('/aluno', (req, res) => {
     res.status(201)
-        .json(addAluno(req.body.nome, req.body.sala));
-});
+        .json(addAluno(req.body.nome, req.body.sala))
+})
 
-app.listen(3000, function(){
-    console.log("Servidor rodando na porta 3000...\n");
-});
+app.listen(3000, () => {
+    console.log("Servidor rodando na porta 3000...\n")
+})
 
 module.exports = { app, addAluno, getAlunos }
